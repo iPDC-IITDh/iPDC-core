@@ -32,6 +32,7 @@
 #include  <stdio.h>
 
 #define MAX_STRING_SIZE 5000
+#define PY_PORT 4433
 
 
 /* ---------------------------------------------------------------- */
@@ -47,9 +48,9 @@ pthread_mutex_t mutex_on_TSB;
 
 unsigned char *cfgframe,*dataframe;
 
-struct sockaddr_in UDP_my_addr,TCP_my_addr; /* my address information */
+struct sockaddr_in UDP_my_addr,TCP_my_addr,pyserver_addr; /* my address information */
 struct sockaddr_in UL_UDP_addr,UL_TCP_addr; /* connector’s address information */
-int UL_UDP_sockfd,UL_TCP_sockfd; /* socket descriptors */
+int UL_UDP_sockfd,UL_TCP_sockfd,pysockfd; /* socket descriptors */
 pthread_t UDP_thread,TCP_thread,p_thread;
 
 FILE *fp_log,*fp_updc;

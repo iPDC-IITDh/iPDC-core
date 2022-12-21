@@ -117,6 +117,22 @@ void setup(){
 		printf("UDP Socket Bind :Sucessfull\n");
 	} 
 
+	/* Create a udp socket to send data to python service*/
+
+    /* create a socket */
+    pysockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    if (pysockfd < 0) {
+        perror("Pyserv : Error creating socket");
+    }
+
+    /* set up server address */
+    memset(&pyserver_addr, 0, sizeof(pyserver_addr));
+    pyserver_addr.sin_family = AF_INET;
+    pyserver_addr.sin_port = htons(PY_PORT);
+    if (inet_aton("127.0.0.1", &pyserver_addr.sin_addr) == 0) {
+        perror("Pyserv : Invalid address");
+    }
+
 
 	/* Created socket and bound to port */
 	/* Create TCP socket and bind and listen on port */

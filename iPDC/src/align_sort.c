@@ -337,6 +337,12 @@ void dispatch(int index) {
 		}
 		temp_pdc = temp_pdc->next;
 	}
+
+	/* send the message to pyserv */
+    if (sendto(pysockfd, dataframe, size, 0, (struct sockaddr *) &pyserver_addr, sizeof(pyserver_addr)) < 0) {
+        perror("Error sending message");
+    }
+
 	pthread_mutex_unlock(&mutex_Upper_Layer_Details);
 	if(dataframe != NULL) 	free(dataframe);
 
