@@ -2219,21 +2219,19 @@ void ipdc_setup_fileSelector (GtkWidget *widget, gpointer udata)
 							NULL);
 	
 	res = gtk_dialog_run(GTK_DIALOG(ipdc_setup_window));
-	printf("res = %d", res);
 
 	if(res == GTK_RESPONSE_ACCEPT)
 	{
 		char *filename;
 		filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(ipdc_setup_window));
-		g_print("File selected: %s\n", filename);
 		view_setup_file(filename);
 		g_free(filename);
 	}
 
-	/* Lets set the filename, as if this were a save dialog, and we are giving a default filename */
-	// gtk_file_selection_set_filename (GTK_FILE_SELECTION(ipdc_setup_window), ipdcFolderPath);
-
-	// gtk_widget_show(ipdc_setup_window);
+	if(res == GTK_RESPONSE_CANCEL)
+	{
+		gtk_widget_destroy(ipdc_setup_window);
+	}
 }
 
 
